@@ -39,6 +39,22 @@ if (!pkg.name) fail('package.json: missing "name"');
 if (!pkg.version) fail('package.json: missing "version"');
 if (pkg.type !== 'module') fail('package.json: "type" must be "module"');
 
+// DSH currently ships prereleases (0.2.1-rc.5). A plain range such as
+// ">=0.2.0 <0.3.0" does NOT match a prerelease under standard semver, so an
+// engines.dsh gate would reject the plugin on every current build. Refuse a
+// non-prerelease-aware range instead of letting it ship silently.
+const enginesDsh = pkg.engines && pkg.engines.dsh;
+if (enginesDsh) {
+  const prereleaseAware = /-(0|rc|alpha|beta|next)/.test(enginesDsh) || enginesDsh.includes('-0');
+  if (!prereleaseAware) {
+    fail('engines.dsh "' + enginesDsh + '" would reject DSH prereleases; use a -0 bound or omit it');
+  } else {
+    note('engines.dsh: ' + enginesDsh);
+  }
+} else {
+  note('engines.dsh: omitted (deliberate — see README 兼容性)');
+}
+
 const patchPath = pkg.dsh && pkg.dsh.bundle && pkg.dsh.bundle.patch;
 if (!patchPath) fail('package.json: missing dsh.bundle.patch');
 

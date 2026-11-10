@@ -25,7 +25,11 @@
 
 ### 方式一：从 GitHub 安装（推荐）
 
-让 Harness 的 `plugin_manager` 执行：
+```bash
+dsh plugin --profile <你的 profile> add github:OWNER/dsh-java-interview
+```
+
+或在 Harness 里让 `plugin_manager` 执行：
 
 ```
 action: install_bundle
@@ -34,16 +38,26 @@ target: github:OWNER/dsh-java-interview
 
 > 把 `OWNER` 换成仓库所属的 GitHub 用户名。装完刷新页面，侧边栏就会出现「Java 面试」入口。
 
+两点说明：
+
+- 本插件是**纯 JavaScript、无构建步骤**，所以不需要 `prepare` 脚本，也**不需要 `allowBuilds` 授权** —— 不会在你机器上执行任何安装期代码。
+- 想锁定版本，可以按 commit 安装：`github:OWNER/dsh-java-interview#<sha>`，之后 push 不会悄悄改变你装的东西。
+
 > ⚠️ 如果你当前是用**本地目录（link）**安装的开发版本，这一步会把本地链接替换成 GitHub 版本，本地改动不再实时生效。想继续改代码，请用方式二。
 
 ### 方式二：本地目录安装（开发用）
 
-```
-action: install_bundle
-target: <本仓库的绝对路径>
+```bash
+dsh plugin --profile <你的 profile> add <本仓库的绝对路径>
 ```
 
-之后编辑 `client.js` 保存、刷新页面即可看到效果，无需重装。
+或在 Harness 里用 `plugin_manager` 的 `install_bundle`，`target` 填本仓库绝对路径。之后编辑 `client.js` 保存、刷新页面即可看到效果，无需重装。
+
+## 兼容性
+
+在 **DSH 0.2.1-rc.5**（桌面版）上开发并验证。
+
+`package.json` **故意不声明 `engines.dsh`**：DSH 当前发布的是 `0.2.1-rc.5` 这类预发布版本，而标准 semver 下 `>=0.2.0 <0.3.0` 并不匹配 `0.2.1-rc.5`，写上反而会让插件在所有当前版本上被拒绝安装。本插件只依赖稳定的 `sidebar.panellist` / `main` slot 与 locale 注册 API，没有 peer 依赖，因此不加版本闸门更安全。若将来上游 API 有破坏性变更，再补 `engines.dsh` 并用 `>=x.y.z-0` 形式覆盖预发布版本。
 
 ## 使用
 
