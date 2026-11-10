@@ -25,7 +25,10 @@
     "client.js",
     "cordis.patch.yml",
     "locale/*.json",
-    "icon.svg"
+    "icon.svg",
+    "LICENSE",
+    "examples/*.json",
+    "scripts/*.mjs"
   ],
   "scripts": {
     "check": "node --check index.js && node --check client.js",

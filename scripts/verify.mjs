@@ -97,9 +97,26 @@ for (const rel of required) {
   }
 }
 
+// Files the README links to must also survive `npm pack`, or the docs break for
+// anyone who installs from a tarball or a registry instead of the git checkout.
+const README = exists('README.md') ? read('README.md') : '';
+const readmeLinks = [...README.matchAll(/\]\(([^)#\s]+)\)/g)]
+  .map((m) => m[1])
+  .filter((p) => !/^[a-z]+:/i.test(p) && !p.startsWith('#'));
+for (const link of readmeLinks) {
+  const target = normalise(link);
+  if (!exists(target)) {
+    fail('README links to missing file: ' + target);
+    continue;
+  }
+  if (listed !== null) {
+    const covered = listed.some((p) => p === target || (p.includes('*') && target.startsWith(p.slice(0, p.indexOf('*')))));
+    if (!covered) fail('README links to ' + target + ', which files[] would drop from the tarball');
+  }
+}
+
 // -------------------------------------------------------------- loader patch
-if (patchPath && exists(patchPath)) {
-  const patch = read(patchPath);
+if (patchPath && exists(patchPath)) {  const patch = read(patchPath);
   if (!patch.includes('insert:')) fail(patchPath + ': no "insert:" list');
   if (!patch.includes(pkg.name)) fail(patchPath + ': does not reference ' + pkg.name);
   const idMatch = patch.match(/^\s*-\s*id:\s*(\S+)/m);
