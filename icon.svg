@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Java interview practice">
+  <defs>
+    <linearGradient id="jqBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f0a23c"/>
+      <stop offset="1" stop-color="#cf4f1c"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="url(#jqBg)"/>
+  <path d="M17 27h24v11a10 10 0 0 1-10 10h-4a10 10 0 0 1-10-10z" fill="none" stroke="#ffffff" stroke-width="3.2" stroke-linejoin="round"/>
+  <path d="M41 30h3.4A4.9 4.9 0 0 1 49.3 34.9v.3A4.9 4.9 0 0 1 44.4 40H41" fill="none" stroke="#ffffff" stroke-width="3.2" stroke-linecap="round"/>
+  <path d="M23.5 20c0-2.4 2.4-3.3 2.4-5.9M31.5 19.3c0-2.8 2.8-3.8 2.8-6.8M39.5 20c0-2.4 2.4-3.3 2.4-5.9" fill="none" stroke="#ffffff" stroke-width="3.2" stroke-linecap="round" opacity="0.92"/>
+</svg>

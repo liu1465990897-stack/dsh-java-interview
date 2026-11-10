@@ -1,0 +1,98 @@
+[
+  {
+    "id": "sample-basic-1",
+    "topic": "basic",
+    "freq": 5,
+    "diff": 2,
+    "q": "Java 的基本数据类型有哪些？各占多少字节？",
+    "a": [
+      "8 种：byte(1) / short(2) / int(4) / long(8) / float(4) / double(8) / char(2) / boolean",
+      "boolean 在 JVM 规范中没有规定具体字节数，只规定了 true/false 两个字面量",
+      "char 是 16 位无符号整数，表示 UTF-16 编码单元"
+    ]
+  },
+  {
+    "id": "sample-basic-2",
+    "topic": "basic",
+    "freq": 4,
+    "diff": 2,
+    "q": "== 和 equals 的区别是什么？",
+    "a": [
+      "== 比较基本类型的值，比较引用类型时比较是否为同一个对象（地址）",
+      "equals 是 Object 的方法，默认实现也是 ==，通常被重写为比较内容",
+      "重写 equals 必须同时重写 hashCode，否则在 HashMap / HashSet 中会失效"
+    ]
+  },
+  {
+    "id": "sample-collection-1",
+    "topic": "collection",
+    "freq": 5,
+    "diff": 3,
+    "q": "HashMap 在 JDK 8 中的底层结构是什么？",
+    "a": [
+      "数组 + 链表 + 红黑树：Node 数组为桶，冲突时挂链表",
+      "链表长度达到 8 且数组长度达到 64 时，链表转为红黑树，查询从 O(n) 降到 O(log n)",
+      "默认初始容量 16，负载因子 0.75，扩容为原容量的 2 倍"
+    ]
+  },
+  {
+    "id": "sample-concurrent-1",
+    "topic": "concurrent",
+    "freq": 5,
+    "diff": 4,
+    "q": "volatile 关键字能保证什么？不能保证什么？",
+    "a": [
+      "保证可见性：写操作立即刷新到主内存，读操作直接从主内存读取",
+      "保证有序性：通过内存屏障禁止指令重排序",
+      "不保证原子性：i++ 这类复合操作依然会丢失更新，需要 synchronized 或原子类"
+    ]
+  },
+  {
+    "id": "sample-jvm-1",
+    "topic": "jvm",
+    "freq": 4,
+    "diff": 3,
+    "q": "JVM 运行时数据区分为哪几块？哪些是线程私有的？",
+    "a": [
+      "线程私有：程序计数器、虚拟机栈、本地方法栈",
+      "线程共享：堆、方法区（JDK 8 起为元空间，使用本地内存）",
+      "程序计数器是唯一不会抛出 OutOfMemoryError 的区域"
+    ]
+  },
+  {
+    "id": "sample-spring-1",
+    "topic": "spring",
+    "freq": 5,
+    "diff": 3,
+    "q": "Spring Bean 的生命周期经历了哪些阶段？",
+    "a": [
+      "实例化 → 属性填充 → Aware 回调 → BeanPostProcessor 前置处理",
+      "InitializingBean.afterPropertiesSet 或 @PostConstruct 初始化",
+      "BeanPostProcessor 后置处理（AOP 代理通常在这一步生成）→ 使用 → 销毁"
+    ]
+  },
+  {
+    "id": "sample-mysql-1",
+    "topic": "mysql",
+    "freq": 5,
+    "diff": 3,
+    "q": "MySQL 的索引为什么使用 B+ 树而不是 B 树？",
+    "a": [
+      "B+ 树非叶子节点只存键，不存数据，同样大小的页能容纳更多键，树更矮，磁盘 IO 更少",
+      "所有数据都在叶子节点，且叶子之间用链表相连，范围查询只需顺序扫描",
+      "每次查询都走到叶子节点，查询性能稳定，便于预估"
+    ]
+  },
+  {
+    "id": "sample-redis-1",
+    "topic": "redis",
+    "freq": 5,
+    "diff": 3,
+    "q": "Redis 的持久化方式 RDB 和 AOF 有什么区别？",
+    "a": [
+      "RDB 是某一时刻的全量快照，文件小、恢复快，但可能丢失最后一次快照后的数据",
+      "AOF 追加写命令日志，数据更完整，但文件大、恢复慢",
+      "生产上常用混合持久化：RDB 存基线，AOF 增量追加，兼顾恢复速度与数据安全"
+    ]
+  }
+]

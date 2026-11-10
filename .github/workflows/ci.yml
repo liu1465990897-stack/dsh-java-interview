@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Syntax check
+        run: |
+          node --check index.js
+          node --check client.js
+
+      - name: Manifest and resource check
+        run: node scripts/verify.mjs
+
+      - name: Sample bank conforms to the import rules
+        run: node scripts/check-sample.mjs
+
+      - name: Sample bank passes the real validator
+        run: node scripts/probe-sample.mjs

@@ -1,0 +1,17 @@
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# package archives
+*.tgz
+
+# editors / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+desktop.ini

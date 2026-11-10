@@ -1,0 +1,3 @@
+- insert:
+    - id: java-interview
+      name: '@local/dsh-java-interview'

@@ -1,0 +1,49 @@
+{
+  "name": "@local/dsh-java-interview",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Java high-frequency interview questions with a sidebar entry, topic practice, a local favorites list and a JSON question-bank importer.",
+  "license": "MIT",
+  "author": "liujin",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "cordis",
+    "java",
+    "interview"
+  ],
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg"
+  ],
+  "scripts": {
+    "check": "node --check index.js && node --check client.js",
+    "verify": "node scripts/verify.mjs",
+    "verify:sample": "node scripts/check-sample.mjs",
+    "verify:validator": "node scripts/probe-sample.mjs",
+    "test": "npm run check && npm run verify && npm run verify:sample && npm run verify:validator"
+  },
+  "dsh": {
+    "bundle": { "patch": "./cordis.patch.yml" },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-renderer",
+        "@deepseek-ai/dsh-client-ui-slots",
+        "@deepseek-ai/dsh-client-locale"
+      ]
+    }
+  }
+}

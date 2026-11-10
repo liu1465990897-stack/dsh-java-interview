@@ -1,0 +1,16 @@
+# Normalise line endings in the repository; keep the working tree untouched.
+* text=auto
+
+*.js    text
+*.mjs   text
+*.json  text
+*.yml   text
+*.yaml  text
+*.md    text
+*.svg   text
+
+# Keep the icon byte-exact if it is ever swapped for a raster format.
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.webp  binary
