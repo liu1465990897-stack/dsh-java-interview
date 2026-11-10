@@ -26,22 +26,22 @@
 ### 方式一：从 GitHub 安装（推荐）
 
 ```bash
-dsh plugin --profile <你的 profile> add github:OWNER/dsh-java-interview
+dsh plugin --profile <你的 profile> add github:liu1465990897-stack/dsh-java-interview
 ```
 
 或在 Harness 里让 `plugin_manager` 执行：
 
 ```
 action: install_bundle
-target: github:OWNER/dsh-java-interview
+target: github:liu1465990897-stack/dsh-java-interview
 ```
 
-> 把 `OWNER` 换成仓库所属的 GitHub 用户名。装完刷新页面，侧边栏就会出现「Java 面试」入口。
+> 装完刷新页面，侧边栏就会出现「Java 面试」入口。
 
 两点说明：
 
 - 本插件是**纯 JavaScript、无构建步骤**，所以不需要 `prepare` 脚本，也**不需要 `allowBuilds` 授权** —— 不会在你机器上执行任何安装期代码。
-- 想锁定版本，可以按 commit 安装：`github:OWNER/dsh-java-interview#<sha>`，之后 push 不会悄悄改变你装的东西。
+- 想锁定版本，可以按 commit 安装：`github:liu1465990897-stack/dsh-java-interview#<sha>`，之后 push 不会悄悄改变你装的东西。
 
 > ⚠️ 如果你当前是用**本地目录（link）**安装的开发版本，这一步会把本地链接替换成 GitHub 版本，本地改动不再实时生效。想继续改代码，请用方式二。
 
